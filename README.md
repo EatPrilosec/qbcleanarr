@@ -42,7 +42,7 @@ services:
     restart: unless-stopped
     environment:
       - RUN_INTERVAL_MINUTES=5
-      - TZ=UTC
+      - TZ=America/New_York
     volumes:
       - ./config.ini:/config/config.ini:ro
 ```
