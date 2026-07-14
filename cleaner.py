@@ -67,6 +67,14 @@ def run_cleaner():
     for section in config.sections():
         try:
             address = config.get(section, "address")
+            
+            # Clean up address if user included http:// or https://
+            if address.startswith("http://"):
+                address = address[7:]
+            elif address.startswith("https://"):
+                address = address[8:]
+            address = address.rstrip("/")
+
             port = config.get(section, "port")
             apikey = config.get(section, "apikey", fallback="")
             categories_str = config.get(section, "categories", fallback="")
