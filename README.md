@@ -37,7 +37,7 @@ version: '3.8'
 
 services:
   qbcleanarr:
-    image: ghcr.io/<your-github-username>/qbcleanarr:latest
+    image: ghcr.io/eatprilosec/qbcleanarr:latest
     container_name: qbcleanarr
     restart: unless-stopped
     environment:
@@ -47,7 +47,7 @@ services:
       - ./config.ini:/config/config.ini:ro
 ```
 
-Replace `<your-github-username>` with your actual GitHub username (lowercase).
+
 
 ## Environment Variables
 
