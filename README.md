@@ -43,6 +43,7 @@ services:
     environment:
       - RUN_INTERVAL_MINUTES=5
       - TZ=America/New_York
+      - LOG_LEVEL=INFO
     volumes:
       - ./config.ini:/config/config.ini:ro
 ```
@@ -52,4 +53,5 @@ services:
 ## Environment Variables
 
 - `RUN_INTERVAL_MINUTES`: How often the cleaner should run in minutes (default: 5).
+- `LOG_LEVEL`: The logging level. Set to `DEBUG` for more detailed output (default: `INFO`).
 - `CONFIG_PATH`: Path to the configuration file (default: `/config/config.ini` inside Docker).
