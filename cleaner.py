@@ -7,7 +7,8 @@ import logging
 from typing import List, Dict
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+log_level = os.environ.get("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(level=getattr(logging, log_level, logging.INFO), format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 CONFIG_PATH = os.environ.get("CONFIG_PATH", "config.ini")
@@ -91,14 +92,18 @@ def run_cleaner():
                 torrents = get_torrents(address, port, apikey, category)
                 to_delete = []
                 
+                logger.debug(f"[{section}] Fetched {len(torrents)} torrents for category '{category}'.")
+                
                 for t in torrents:
                     # state: pausedUP (completed and paused/not seeding) or completed
                     state = t.get("state", "")
                     name = t.get("name", "Unknown")
                     hash_id = t.get("hash")
                     
-                    # In qBittorrent, completed torrents that are not seeding are usually 'pausedUP'
-                    if state in ["pausedUP"]:
+                    logger.debug(f"[{section}] Found torrent: {name} (State: {state})")
+                    
+                    # In qBittorrent, completed torrents that are not seeding are usually 'pausedUP' or 'stoppedUP' (newer versions)
+                    if state in ["pausedUP", "stoppedUP"]:
                         to_delete.append(hash_id)
                         logger.info(f"[{section}] Marking for deletion: {name} (State: {state})")
                 
