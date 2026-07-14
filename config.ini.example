@@ -1,0 +1,13 @@
+[qbseeder]
+address=glutun
+port=8180
+apikey=qbt_BW5XAsxvvqy38hKs7t8J7GHzWnKh
+categories=sonarr-imported,radarr-imported
+cleanmode=remove
+
+[qbrss]
+address=glutun
+port=8280
+apikey=qbt_LUnCLhwu9VIFPUZUejkgt8EXkdaU
+categories=JustSeedin
+cleanmode=delete
